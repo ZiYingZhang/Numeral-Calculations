@@ -1,0 +1,30 @@
+clear;clc
+Q1=[];
+Q2=[];
+T1=[];
+Wencha=[];
+H1=[];
+for tw1=90:0.1:110
+    wencha=111.38-tw1;
+    t1=0.5*(111.38+tw1);
+    lambda=-5*1e-6*t1^2+0.00125*t1+0.608;
+    miu=4.45*1e-8*t1^2-1.169*1e-5*t1+0.001007;
+    r=-6*t1^2-1460*t1+2463*1e3;
+    rou=-0.0025*t1^2-0.215*t1+1005;
+    h1=1.13*(lambda.^3*rou.^2*9.8*r/miu/1.5/wencha).^0.25;
+    q1=h1*wencha;
+    q2=2966*(tw1-68);
+    Q1=[Q1 q1];
+    Q2=[Q2 q2];
+    T1=[T1 t1];
+    Wencha=[Wencha wencha];
+    H1=[H1 h1];
+end
+tw1=90:0.1:110;
+plot(tw1,Q1,'k-')
+hold on
+plot(tw1,Q2,'k--')
+grid on
+xlabel('{t_w_1(℃)}')
+ylabel('{q(W/m^2)}')
+legend('q1','q2')
